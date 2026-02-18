@@ -5,7 +5,7 @@ import { neuraTestnet } from './network';
 import { motion } from 'framer-motion';
 import { AreaChart, Area, ResponsiveContainer } from 'recharts';
 import toast, { Toaster } from 'react-hot-toast';
-import { TrendingUp, Zap, ShieldCheck, LogOut, History, Activity } from 'lucide-react';
+import { TrendingUp, Zap, ShieldCheck, LogOut } from 'lucide-react'; // History e Activity removidos
 
 const ASSETS = ["ANKR", "BTC", "ETH", "SOL", "BNB", "XRP"];
 const INSIGHTS = [
