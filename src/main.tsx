@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
+import App from './App'
 import './index.css'
 import { PrivyProvider } from '@privy-io/react-auth'
 import { neuraTestnet } from './network'
@@ -14,12 +14,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         defaultChain: neuraTestnet,
         supportedChains: [neuraTestnet],
         embeddedWallets: {
-          // A configuração createOnLogin agora deve ficar dentro de 'ethereum' ou 'solana'
+          // Configuração correta para carteiras embarcadas
           ethereum: {
-            createOnLogin: 'users-without-wallets',
+            createOnLogin: 'users-without-wallets', // ou 'all-users' / 'off'
           },
-          // Esta propriedade permanece no nível superior de embeddedWallets
-          requireUserPasswordOnCreate: false,
+          // Não há propriedade 'requireUserPasswordOnCreate' na Privy
         },
         appearance: {
           theme: 'dark',
