@@ -1,9 +1,9 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
-import './index.css'
-import { PrivyProvider } from '@privy-io/react-auth'
-import { neuraTestnet } from './network'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { PrivyProvider } from '@privy-io/react-auth';
+import App from './App';
+import './index.css';
+import { neuraTestnet } from './network'; // certifique-se de que este arquivo existe
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -14,11 +14,10 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         defaultChain: neuraTestnet,
         supportedChains: [neuraTestnet],
         embeddedWallets: {
-          // Configuração correta para carteiras embarcadas
+          // Cria carteira apenas para usuários que não possuem uma externa
           ethereum: {
-            createOnLogin: 'users-without-wallets', // ou 'all-users' / 'off'
+            createOnLogin: 'users-without-wallets',
           },
-          // Não há propriedade 'requireUserPasswordOnCreate' na Privy
         },
         appearance: {
           theme: 'dark',
@@ -28,5 +27,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     >
       <App />
     </PrivyProvider>
-  </React.StrictMode>,
-)
+  </React.StrictMode>
+);
