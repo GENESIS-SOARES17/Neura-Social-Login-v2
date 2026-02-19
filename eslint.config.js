@@ -7,54 +7,46 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
 
 export default [
-  // 1. Ignorados globais (substitui o antigo globalIgnores)
+  // 1. Ignorados globais
   {
-    ignores: ['dist', 'coverage', 'build', '.next', 'out'], // adicione outras pastas conforme necessário
+    ignores: ['dist', 'coverage', 'build', '.next', 'out'],
   },
 
-  // 2. Configuração principal para arquivos TypeScript/JavaScript (React)
+  // 2. Configuração principal (React + TypeScript)
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
     extends: [
-      js.configs.recommended,               // regras ESLint recomendadas
-      ...tseslint.configs.recommended,      // regras TypeScript recomendadas
-      react.configs.flat.recommended,       // regras React recomendadas (plugin react)
-      reactHooks.configs.flat.recommended,  // regras para React Hooks
-      reactRefresh.configs.vite,             // regras para React Refresh (Vite)
+      js.configs.recommended,
+      ...tseslint.configs.recommended,
+      react.configs.flat.recommended,
+      reactHooks.configs.flat.recommended,
+      reactRefresh.configs.vite,
     ],
     languageOptions: {
-      ecmaVersion: 'latest',                 // suporte a recursos modernos
+      ecmaVersion: 'latest',
       globals: {
-        ...globals.browser,                  // variáveis globais do navegador
+        ...globals.browser,
       },
-      parser: tseslint.parser,               // parser TypeScript
+      parser: tseslint.parser,
       parserOptions: {
-        project: './tsconfig.json',           // necessário para regras que exigem informações de tipo
-        tsconfigRootDir: import.meta.dirname, // compatibilidade com ES modules
+        project: './tsconfig.json',
+        tsconfigRootDir: import.meta.dirname, // necessário em ES modules
       },
     },
     settings: {
       react: {
-        version: 'detect',                    // detecta automaticamente a versão do React
+        version: 'detect',
       },
     },
-    // Regras personalizadas (opcional – descomente se necessário)
-    // rules: {
-    //   'react/react-in-jsx-scope': 'off',   // não necessário com React 17+
-    //   'react/prop-types': 'off',            // se usar TypeScript, prop-types são redundantes
-    // },
   },
 
-  // 3. Configuração separada para arquivos Node.js (ex: scripts, configs)
+  // 3. Configuração para Node.js (arquivos de configuração)
   {
-    files: ['**/*.config.js', 'scripts/**/*.js', '.eslintrc.{js,cjs}'],
+    files: ['**/*.config.{js,ts}', 'scripts/**/*.{js,ts}'],
     languageOptions: {
       globals: {
-        ...globals.node,                      // variáveis globais do Node.js
+        ...globals.node,
       },
-    },
-    rules: {
-      // regras específicas para Node, se necessário
     },
   },
 ]
